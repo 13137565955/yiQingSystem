@@ -332,6 +332,9 @@ export default {
         this.touxiang = this.basePath + "/file/" + result.head;
         this.username = result.username;
       },
+      error: () => {
+        this.$router.push("/");
+      },
     });
   },
   methods: {

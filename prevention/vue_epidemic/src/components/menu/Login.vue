@@ -1,55 +1,41 @@
 <template>
-  <div
-    style="
-      width: 25%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    "
-  >
-    <transition name="el-fade-in-linear">
-      <el-card
-        class="box-card"
-        shadow="hover"
-        style="text-align: center"
-        @keyup.enter.native="login"
+  <div class="login-bg">
+    <el-card
+      class="login-card"
+      shadow="hover"
+      style="text-align: center"
+      @keyup.enter.native="login"
+    >
+      <div slot="header" class="clearfix" style="text-align: center">
+        <h2 style="font-size: 1rem">校园疫情防控管理系统</h2>
+      </div>
+      <el-input
+        prefix-icon="el-icon-user-solid"
+        v-model="input_user"
+        placeholder="请输入用户名"
+        class="inp"
+      ></el-input>
+      <div style="height: 1.3rem"></div>
+      <el-input
+        prefix-icon="el-icon-lock"
+        placeholder="请输入密码"
+        v-model="input_pwd"
+        show-password
+        class="inp"
+      ></el-input>
+      <el-radio-group
+        v-model="radio3"
+        size="small"
+        style="display: flex; justify-content: space-around; margin-top: 1.3rem"
       >
-        <div slot="header" class="clearfix" style="text-align: center">
-          <h2 style="font-size: 1rem">校园疫情防控管理系统</h2>
-        </div>
-        <el-input
-          prefix-icon="el-icon-user-solid"
-          v-model="input_user"
-          placeholder="请输入用户名"
-          class="inp"
-        ></el-input>
-        <div style="height: 1.3rem"></div>
-        <el-input
-          prefix-icon="el-icon-lock"
-          placeholder="请输入密码"
-          v-model="input_pwd"
-          show-password
-          class="inp"
-        ></el-input>
-        <el-radio-group
-          v-model="radio3"
-          size="small"
-          style="
-            display: flex;
-            justify-content: space-around;
-            margin-top: 1.3rem;
-          "
-        >
-          <el-radio label="1" border>管理员</el-radio>
-          <el-radio label="2" border>学生</el-radio>
-          <el-radio label="3" border>教师</el-radio>
-        </el-radio-group>
-        <el-button type="primary" class="button" size="small" @click="login"
-          >登录</el-button
-        >
-      </el-card>
-    </transition>
+        <el-radio label="1" border>管理员</el-radio>
+        <el-radio label="2" border>学生</el-radio>
+        <el-radio label="3" border>教师</el-radio>
+      </el-radio-group>
+      <el-button type="primary" class="button" size="small" @click="login"
+        >登录</el-button
+      >
+    </el-card>
   </div>
 </template>
 <script>
@@ -68,13 +54,13 @@ export default {
      * 用户名：username:this.input_user,
      * 密码：password:this.input_pwd,
      */
-    login() {
+    async login() {
       if (!this.input_user || !this.input_pwd) {
         this.open3("用户名,密码不能为空");
         this.input_user = "";
         this.input_pwd = "";
       } else {
-        this.$Axios({
+        await this.$Axios({
           url: "/users/login",
           method: "post",
           data: {
@@ -99,7 +85,6 @@ export default {
                 "socketData",
                 JSON.stringify(socketData)
               );
-              //  window.localStorage.setItem("id",id);
               if (this.radio3 == 1) this.$router.push("/admin/home");
               if (this.radio3 == 2) this.$router.push("/student/home");
               if (this.radio3 == 3) this.$router.push("/teacher/home");
@@ -120,6 +105,18 @@ export default {
 </script>
 <style lang="scss" scoped>
 .login {
+  &-bg {
+    width: 100%;
+    height: 100vh;
+    background: url("~@/assets/images/bg.jpg") center center / 100%;
+  }
+  &-card {
+    width: 450px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
   h3 {
     text-align: center;
     height: 60px;

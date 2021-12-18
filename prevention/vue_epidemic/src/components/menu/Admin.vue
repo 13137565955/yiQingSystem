@@ -233,6 +233,9 @@ export default {
         this.username = result.username;
         this.touxiang = this.basePath + "/file/" + result.head;
       },
+      error: () => {
+        this.$router.push("/");
+      },
     });
   },
 

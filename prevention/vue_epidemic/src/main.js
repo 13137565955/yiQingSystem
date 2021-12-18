@@ -51,6 +51,9 @@ let futureAxios = (options) => {
         }
     }).catch(err => {
         let msg = err.response ? err.response.data : '请求异常'
+        window.localStorage.removeItem('token')
+        window.localStorage.removeItem('loglevel:webpack-dev-server')
+        window.localStorage.removeItem('socketData')
         if (options.error) {
             options.error(msg)
             Message.error({
@@ -65,7 +68,6 @@ let futureAxios = (options) => {
         }
     })
 }
-
 /**
  * //封装axios方法,为不需要登录操作时使用
  * @param options 配置
