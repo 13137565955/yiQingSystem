@@ -22,7 +22,7 @@ module.exports = class users_dao extends require('../model/users_mod') {
                 address: loginData[0].address,
                 createtime: loginData[0].createtime,
                 sex: loginData[0].sex
-            }, global.globalKey, 1)
+            }, global.globalKey, 3600)
             // 请求结束
             resp.send({
                 loginData,

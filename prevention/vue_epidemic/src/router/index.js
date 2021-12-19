@@ -34,11 +34,15 @@ const routes = [{
       },
       {
         path: 'oto',
-        component: () => import('@/components/socket/otp_socket.vue')
+        component: () => import('@/components/socket/oto_socket.vue')
       },
       {
         path: 'add',
         component: () => import('@/components/main/addclass.vue')
+      },
+      {
+        path: 'user',
+        component: () => import('@/components/main/user.vue')
       },
     ]
   },
@@ -72,7 +76,7 @@ const routes = [{
       },
       {
         path: 'oto',
-        component: () => import('@/components/socket/otp_socket.vue')
+        component: () => import('@/components/socket/oto_socket.vue')
       },
     ]
   },
@@ -102,7 +106,7 @@ const routes = [{
       },
       {
         path: 'oto',
-        component: () => import('@/components/socket/otp_socket.vue')
+        component: () => import('@/components/socket/oto_socket.vue')
       },
     ]
   },

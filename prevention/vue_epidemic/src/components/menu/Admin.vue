@@ -1,25 +1,15 @@
 <template>
-  <div class="common">
+  <div class="common" style="height: 100vh; overflow: hidden">
+    <!-- //头部 -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-      <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button">
             <i class="fas fa-bars"></i>
           </a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <router-link tag="a" to="/admin/home" class="nav-link"
-            >Home</router-link
-          >
-        </li>
       </ul>
-      <!--//新消息提示-->
-      <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button">
-          <i class="fas fa-bars"></i>
-        </a>
         <el-dropdown>
           <span class="el-dropdown-link">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button">
@@ -36,11 +26,8 @@
         <div class="dropdown-divider"></div>
       </ul>
     </nav>
-    <!-- /.navbar -->
-
-    <!-- Main Sidebar Container -->
+    <!-- //左侧菜单 -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
       <a to="/admin/home" class="brand-link">
         <img
           src="dist/img/AdminLTELogo.png"
@@ -50,9 +37,7 @@
         />
         <span v-text="type" class="brand-text font-weight-light"></span>
       </a>
-      <!-- Sidebar -->
       <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
             <img
@@ -66,7 +51,6 @@
             <a href="#" v-text="username" class="d-block"></a>
           </div>
         </div>
-        <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul
             class="nav nav-pills nav-sidebar flex-column"
@@ -85,7 +69,6 @@
                 <i :class="item.icon"></i>
                 <p>
                   {{ item.title }}
-                  <!--<span class="right badge badge-danger">New</span>-->
                 </p>
               </a>
             </router-link>
@@ -115,39 +98,22 @@
             </li>
           </ul>
         </nav>
-        <!-- /.sidebar-menu -->
       </div>
-      <!-- /.sidebar -->
     </aside>
-
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-
       <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
               <h5 class="m-0 text-dark"></h5>
             </div>
-            <!-- /.col -->
-            <!-- <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard v1</li>
-                            </ol>
-            </div>-->
-            <!-- &lt;!&ndash; /.col &ndash;&gt; -->
           </div>
-          <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
       </div>
-
-      <!-- /.content-header -->
-
-      <!-- Main content -->
-      <section class="content" style="height: 48rem; overflow-y: scroll">
+      <section
+        class="content"
+        style="height: 100vh; overflow-y: scroll; padding-bottom: 100px"
+      >
         <div class="container-fluid">
           <el-row style="padding: 10px 10px">
             <el-col :span="24">
@@ -158,29 +124,8 @@
           </el-row>
         </div>
       </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-      <strong>
-        @洪-2020-Version 2.0
-        <a href="https://gitee.com/hongjilin">校园疫情防控管理系统</a>.
-      </strong>
-      All rights reserved.
-      <div class="float-right d-none d-sm-inline-block">
-        <b>
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button">
-            <i class="fas fa-bars"></i>
-          </a>
-        </b>
-      </div>
-    </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+    <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
 </template>
 
@@ -213,6 +158,11 @@ export default {
           title: "添加班级",
           icon: "nav-icon fa fa-window-restore",
         },
+        {
+          path: "/admin/user",
+          title: "个人信息",
+          icon: "nav-icon fa fa-user-circle",
+        },
       ],
     };
   },
@@ -229,7 +179,9 @@ export default {
       method: "get",
       data: {},
       success: (result) => {
-        this.type = "Admin";
+        if (result.type == 1) this.type = "管理员";
+        else if (result.type == 2) this.type = "学生";
+        else if (result.type == 3) this.type = "教师";
         this.username = result.username;
         this.touxiang = this.basePath + "/file/" + result.head;
       },
@@ -241,8 +193,7 @@ export default {
 
   methods: {
     outlogin() {
-      this.$router.push("/Login");
-      // window.location.href = "http://localhost:80/#/Login";
+      this.$router.push("/");
     },
   },
 };

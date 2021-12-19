@@ -14,18 +14,27 @@
               <el-button
                 @click="drawer = true"
                 type="primary"
-                style="margin-left: 16px;background: none;border: none;color: dodgerblue"
+                style="
+                  margin-left: 16px;
+                  background: none;
+                  border: none;
+                  color: dodgerblue;
+                "
               >
-                <span v-text="'在线'+online+'人'"></span>
+                <span v-text="'在线' + online + '人'"></span>
               </el-button>
             </div>
           </div>
           <div class="comment" id="divDetail">
             <ul>
-              <li v-for="item in commlist" :key="item.id" style=" list-style-type:none;">
+              <li
+                v-for="item in commlist"
+                :key="item.id"
+                style="list-style-type: none"
+              >
                 <div class="msgOther" v-if="!item.if">
                   <div class="head_img">
-                    <img :src="imgpath+item.msgData.img" alt />
+                    <img :src="imgpath + item.msgData.img" alt />
                   </div>
                   <div class="msg">
                     <div class="msg_title">
@@ -33,7 +42,7 @@
                       <i v-text="timeDetia(item.date)">2020-8-28</i>
                     </div>
                     <div>
-                      <pre>{{item.msgData.msg}}</pre>
+                      <pre>{{ item.msgData.msg }}</pre>
                     </div>
                   </div>
                 </div>
@@ -44,18 +53,18 @@
                       <span v-text="item.msgData.name"></span>
                     </div>
                     <div>
-                      <pre>{{item.msgData.msg}}</pre>
+                      <pre>{{ item.msgData.msg }}</pre>
                     </div>
                   </div>
                   <div class="head_img">
-                    <img :src="imgpath+item.msgData.img" alt />
+                    <img :src="imgpath + item.msgData.img" alt />
                   </div>
                 </div>
               </li>
             </ul>
           </div>
           <div class="send">
-            <div style="margin-top: 15px;">
+            <div style="margin-top: 15px">
               <el-input
                 @keyup.enter.native="send"
                 type="textarea"
@@ -88,11 +97,11 @@ export default {
             msg: "系统提示:请不要轻易相信陌生人的交易信息",
             name: "系统提示",
             uid: 2,
-            img: "999.png"
+            img: "999.png",
           },
-          date: 20202020
-        }
-      ]
+          date: 20202020,
+        },
+      ],
     };
   },
 
@@ -127,7 +136,7 @@ export default {
     //手动离开群聊提示
     quit(name) {
       this.open(name + "离开了群聊", 1000, "info");
-    }
+    },
   },
   ///生命周期函数
   created() {
@@ -196,7 +205,7 @@ export default {
       this.socket.emit("join", joinData);
     },
 
-    timeDetia: function(date) {
+    timeDetia: function (date) {
       var time;
       var d = new Date(date);
       var n = new Date();
@@ -255,10 +264,10 @@ export default {
         // showClose: true,
         message: message,
         duration: duration,
-        type: type
+        type: type,
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
