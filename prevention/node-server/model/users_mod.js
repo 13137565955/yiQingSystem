@@ -51,6 +51,7 @@ module.exports = class users_mod extends require('./model') {
     static getUsersByTypePageMod(type, currPage, pageNum) {
         pageNum = Number(pageNum);
         currPage = Number(currPage);
+        // 数据库是第几个 所以要页数乘以个数
         currPage = Number(currPage * pageNum)
         return new Promise((resolve, reject) => {
             let sql = 'select * from user where type = ' + type + ' order by modifytime desc LIMIT ?,?'

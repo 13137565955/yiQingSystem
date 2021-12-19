@@ -132,8 +132,8 @@
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page="currentPage"
-              :page-sizes="[10, 20, 30, 40, 50]"
-              :page-size="10"
+              :page-sizes="[5, 10, 20, 30, 40]"
+              :page-size="5"
               layout="total, sizes, prev, pager, next, jumper"
               :total="UserSize"
             >
@@ -208,7 +208,7 @@ export default {
       currentPage: 1,
 
       tableData: [],
-      pageSize: 10,
+      pageSize: 5,
       pageNo: 1,
       user: "",
     };

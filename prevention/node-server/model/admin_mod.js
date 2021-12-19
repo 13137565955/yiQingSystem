@@ -344,20 +344,20 @@ module.exports = class admin_mod extends require('./model') {
     }
 
     static addClassesMod(classAll, classes) {
-            return new Promise((resolve, reject)=>{
-                for (let i=0;i<classAll.length;i++){
-                    if (classAll[i].classes==classes)  {
-                        reject("重复添加")
-                        return
-                    }
+        return new Promise((resolve, reject) => {
+            for (let i = 0; i < classAll.length; i++) {
+                if (classAll[i].classes == classes) {
+                    reject("重复添加")
+                    return
                 }
-                let sql="insert into `class` (classes) values (?) "
-                this.query(sql,this.formatParams(classes)).then(()=>{
-                    resolve("添加成功")
-                }).catch(()=>{
-                    reject("添加失败")
-                })
+            }
+            let sql = "insert into `class` (classes) values (?) "
+            this.query(sql, this.formatParams(classes)).then(() => {
+                resolve("添加成功")
+            }).catch(() => {
+                reject("添加失败")
             })
+        })
     }
 
     /**
@@ -367,26 +367,26 @@ module.exports = class admin_mod extends require('./model') {
      * @param currPage
      * @returns {Promise<any>}
      */
-    static getClassesSearMod(classes,pageNum, currPage){
+    static getClassesSearMod(classes, pageNum, currPage) {
         pageNum = Number(pageNum)
         currPage = Number(currPage)
         currPage = Number(pageNum * currPage)
-        return new Promise((resolve, reject)=>{
-            let sql="select * from `class` where classes like '%"+classes+"%' limit ?,?"
-            this.query(sql,this.formatParams(currPage,pageNum)).then(result=>{
+        return new Promise((resolve, reject) => {
+            let sql = "select * from `class` where classes like '%" + classes + "%' limit ?,?"
+            this.query(sql, this.formatParams(currPage, pageNum)).then(result => {
                 resolve(result)
-            }).catch(()=>{
+            }).catch(() => {
                 reject("未获得班级")
             })
         })
     }
-    static getClassesSearTotal(classes){
-        return new Promise((resolve, reject)=>{
-            let sql="select count(1) as count from `class` where classes like '%"+classes+"%' "
+    static getClassesSearTotal(classes) {
+        return new Promise((resolve, reject) => {
+            let sql = "select count(1) as count from `class` where classes like '%" + classes + "%' "
             console.log(sql)
-            this.query(sql).then(result=>{
+            this.query(sql).then(result => {
                 resolve(result)
-            }).catch(()=>{
+            }).catch(() => {
                 reject("未获得班级")
             })
         })
@@ -394,4 +394,3 @@ module.exports = class admin_mod extends require('./model') {
 
 
 }
-
